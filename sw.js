@@ -1,4 +1,4 @@
-const CACHE = "kangu-test-appareils-v1";
+const CACHE = "kangu-test-appareils-v2";
 const FICHIERS = [
   "./",
   "./index.html",

@@ -132,7 +132,14 @@ async function copierJournal() {
 
 async function initialiser() {
   afficherAppareil();
-  afficherMesureReseau();
+  // loadEventEnd n'est renseigné qu'après la fin de l'événement load : on attend donc
+  // cet événement, puis un court délai, avant de mesurer.
+  const mesurerApresChargement = () => setTimeout(afficherMesureReseau, 300);
+  if (document.readyState === "complete") {
+    mesurerApresChargement();
+  } else {
+    globalThis.addEventListener("load", mesurerApresChargement, { once: true });
+  }
 
   if ("serviceWorker" in navigator) {
     try {
